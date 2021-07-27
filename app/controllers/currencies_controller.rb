@@ -9,8 +9,10 @@ class CurrenciesController < ApplicationController
   end
 
   def currency_details
-    @currency = Currency.find(params[:id])    
-    render json: { details: @currency.details }
+    @currency = Currency.find(params[:id])
+    currency_details = @currency.details
+    render json: currency_details, status: 200
+    # render json: ["Error message"], status: 500
   end
 
   def calculate

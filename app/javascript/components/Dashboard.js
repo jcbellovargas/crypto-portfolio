@@ -68,7 +68,7 @@ export default function Dashboard() {
       id: currency_id
     })
     .then( (response) => {
-      setCurrencyDetails(response.data.details);
+      setCurrencyDetails(response.data);
       resetSearch();
     })
   }
@@ -94,8 +94,9 @@ export default function Dashboard() {
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  currencyDetails.name || fetchCurrencyDetails(810); //Bitcoin
-  debugger;
+  // currencyDetails.name || fetchCurrencyDetails(810); //Bitcoin
+  // fetchCurrencyDetails(810);
+  // debugger;
   return (
     <div className={classes.root}>
       <CssBaseline />

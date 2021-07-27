@@ -33,7 +33,7 @@ export default function SelectedCurrency(props) {
         </Grid>
         <Grid item xs={12}>
           <Typography component="p" variant="h4">
-            ${details.price}
+            ${details.price}            
           </Typography>
         </Grid>
         <Grid item xs={12}>
