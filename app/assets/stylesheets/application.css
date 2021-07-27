@@ -31,15 +31,19 @@ body{
   background: #664AFF;
 }
 .wrapper{
-  max-width: 450px;
+  /*max-width: 450px;*/
+  max-width: 700px;
   margin: 150px auto;
 }
 .wrapper .search-input{
   background: #fff;
-  width: 100%;
+  /*width: 100%;*/
+  width: 700px;
   border-radius: 5px;
   position: relative;
   box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+  position: absolute;
+  z-index: 3;
 }
 .search-input input{
   height: 55px;
@@ -50,13 +54,14 @@ body{
   padding: 0 60px 0 20px;
   font-size: 18px;
   box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+
 }
 .search-input.active input{
   border-radius: 5px 5px 0 0;
 }
 .search-input .autocom-box{
   padding: 0;
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
   max-height: 280px;
   overflow-y: auto;
@@ -91,4 +96,8 @@ body{
   font-size: 20px;
   color: #9cdbb3;
   cursor: pointer;
+}
+
+img {
+  max-height: 1.9rem;
 }

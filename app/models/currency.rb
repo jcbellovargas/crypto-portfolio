@@ -11,7 +11,7 @@ class Currency < ApplicationRecord
       response[:symbol] = json_response["symbol"].upcase
       response[:volume] = json_response["market_data"]["total_volume"]["usd"]
       response[:price] = json_response["market_data"]["current_price"]["usd"]
-      response[:change_24h] = json_response["market_data"]["price_change_percentage_24h"] || 0
+      response[:change_24h] = json_response["market_data"]["price_change_percentage_24h"].round(2) || 0
       response[:market_cap] = json_response["market_data"]["market_cap"]["usd"]
       response[:symbol] = json_response["symbol"]
       response[:img] = json_response["image"]["small"]  
