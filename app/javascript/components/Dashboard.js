@@ -71,6 +71,9 @@ export default function Dashboard() {
       setCurrencyDetails(response.data);
       resetSearch();
     })
+    .catch( (error) => {
+      console.log(error.response)
+    })
   }
   const handleChange = (e) => {
     const pattern = e.target.value;
@@ -89,14 +92,10 @@ export default function Dashboard() {
   }
 /******************************************/
 
-
   const classes = useStyles();
-
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  currencyDetails.name || fetchCurrencyDetails(810); //Bitcoin
 
-  // currencyDetails.name || fetchCurrencyDetails(810); //Bitcoin
-  // fetchCurrencyDetails(810);
-  // debugger;
   return (
     <div className={classes.root}>
       <CssBaseline />
