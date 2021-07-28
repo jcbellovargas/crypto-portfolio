@@ -3,10 +3,6 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, CartesianGrid, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
-const createData = (time, amount) =>  {
-  return { time, amount };
-}
-
 const createChartData = (market_data) => {
   return market_data.map((item, i) => {
     return { time: item["date"], amount: item["price"]}
