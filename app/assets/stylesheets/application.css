@@ -14,7 +14,6 @@
  *= require_self
  */
 
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
   margin: 0;
@@ -23,27 +22,25 @@
   font-family: 'Poppins', sans-serif;
 }
 body{
-  background: #9cdbb3;
   padding: 0 20px;
 }
 ::selection{
   color: #fff;
   background: #664AFF;
 }
-.wrapper{
+.search-wrapper{
   /*max-width: 450px;*/
   max-width: 700px;
   margin: 150px auto;
 }
-.wrapper .search-input{
+.search-wrapper .search-input{
   background: #fff;
   /*width: 100%;*/
   width: 700px;
   border-radius: 5px;
-  position: relative;
   box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
-  position: absolute;
   z-index: 3;
+  position: absolute;
 }
 .search-input input{
   height: 55px;
@@ -94,7 +91,7 @@ body{
   text-align: center;
   line-height: 55px;
   font-size: 20px;
-  color: #9cdbb3;
+  color: #8593de;
   cursor: pointer;
 }
 

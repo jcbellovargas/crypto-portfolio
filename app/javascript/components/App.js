@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Portfolio from './Portfolio'
 import axios from 'axios'
 import Dashboard from './Dashboard'
 
@@ -10,7 +9,6 @@ class App extends Component {
 
   render () {
     return (
-      // <Portfolio />
       <Dashboard />
     );
   }

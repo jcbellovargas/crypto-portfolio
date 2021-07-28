@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-function Search(props) {
+export default function Search(props) {
   let results;
   let autocompleteClass = "search-input";
   if (props.searchResults) {
@@ -10,7 +10,7 @@ function Search(props) {
     autocompleteClass += ' active'
   }
   return (
-    <div className="wrapper">
+    <div className="search-wrapper">
       <div className={autocompleteClass}>
         <input onChange={props.onChange} placeholder="Search Crypto"/>
         <div className="autocom-box">
@@ -24,5 +24,3 @@ function Search(props) {
   
   );
 }
-
-export default Search

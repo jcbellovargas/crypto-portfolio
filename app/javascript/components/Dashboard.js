@@ -11,6 +11,7 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
@@ -31,6 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+  },
+  centeredContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    color: 'secondary',
+  },
+  loader: {
+    marginTop: '100px',
+    position: 'absolute',
+    width: '100%',
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -66,6 +77,7 @@ export default function Dashboard() {
     return;
   }
   const fetchCurrencyDetails = (currency_id) => {
+    setLoaded(false);
     axios.post('./currency_details', {
       id: currency_id
     })
@@ -89,6 +101,7 @@ export default function Dashboard() {
     })
   }
   const handleClick = (e) => {
+    resetSearch();
     const currency_id = e.target.getAttribute("data-id");
     console.log(currency_id);
     fetchCurrencyDetails(currency_id);
@@ -101,6 +114,7 @@ export default function Dashboard() {
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -110,19 +124,26 @@ export default function Dashboard() {
             Crypto Portfolio
           </Typography>
         </Toolbar>
-
       </AppBar>
 
       <main className={classes.content}>
-        <Search 
-          onChange={ (e) => handleChange(e) } 
-          searchResults={currentSearch.currencies}
-          onClick={ (e) => handleClick(e) }
-        />
-        <div className={classes.appBarSpacer} />
+        <div className={classes.appBarSpacer}>
+          <Search
+            onChange={ (e) => handleChange(e) }
+            searchResults={currentSearch.currencies}
+            onClick={ (e) => handleClick(e) }
+          />
+          {!(loaded) && (
+            <div className={classes.loader}>
+              <div className={classes.centeredContainer}>
+                <CircularProgress color='secondary'/>
+              </div>
+            </div>
+          )}
+        </div>
+
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-
             {/* SelectedCurrency */}
             <Grid item xs={12} md={4} lg={3}>
               {loaded && (
@@ -141,9 +162,11 @@ export default function Dashboard() {
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
+              {loaded && (
+                <Paper className={classes.paper}>
+                  <Orders />
+                </Paper>
+              )}
             </Grid>
           </Grid>
         </Container>
@@ -151,3 +174,5 @@ export default function Dashboard() {
     </div>
   );
 }
+
+
