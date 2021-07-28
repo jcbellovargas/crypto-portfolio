@@ -12,11 +12,13 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
 
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import SelectedCurrency from './SelectedCurrency';
-import Orders from './Orders';
+import CurrentPortfolio from './CurrentPortfolio';
+import AddCurrencyDialog from './AddCurrencyDialog';
 
 import SearchBar from "material-ui-search-bar";
 import Search from "./Search";
@@ -70,7 +72,9 @@ export default function Dashboard() {
   const [currentSearch, setCurrentSearch] = useState([]);
   const [currencyDetails, setCurrencyDetails] = useState({});
   const [recentPrices, setRecentPrices] = useState({});
+  const [portfolio, setPortfolio] = useState({});
   const [loaded, setLoaded] = useState(false);
+  // const [openDialog, setOpenDialog] = useState(false);
 
   const resetSearch = () => {
     setCurrentSearch([]);
@@ -160,14 +164,15 @@ export default function Dashboard() {
                 </Paper>
               )}
             </Grid>
-            {/* Recent Orders */}
+            {/* Current Portfolio */}
             <Grid item xs={12}>
               {loaded && (
                 <Paper className={classes.paper}>
-                  <Orders />
+                  <CurrentPortfolio />
                 </Paper>
               )}
             </Grid>
+            <AddCurrencyDialog />                
           </Grid>
         </Container>
       </main>
