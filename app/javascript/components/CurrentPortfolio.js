@@ -13,13 +13,13 @@ function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
 }
 
-const rows = [
-  createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-  createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-];
+// const rows = [
+//   createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
+//   createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
+//   createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
+//   createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
+//   createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
+// ];
 
 function preventDefault(event) {
   event.preventDefault();
@@ -29,10 +29,16 @@ const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
+  logo: {
+    marginLeft: '0.7rem',
+    maxHeight: '1.5rem',
+    paddingTop: '0.3rem',
+  },
 }));
 
-export default function CurrentPortfolio() {
+export default function CurrentPortfolio(props) {
   const classes = useStyles();
+  const rows = props.portfolio;
   return (
     <React.Fragment>
       <Title>Current Portfolio</Title>
@@ -49,11 +55,14 @@ export default function CurrentPortfolio() {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell>
+                {row.name}
+                <img className={classes.logo} src={row.img}/>
+              </TableCell>
+              <TableCell>{row.price}</TableCell>
+              <TableCell>{row.amount}</TableCell>
+              <TableCell>{row.percentage}</TableCell>
+              <TableCell align="right">{row.value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
