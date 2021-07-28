@@ -33,8 +33,6 @@ export default function Portfolio() {
       resetSearch();
     })
   }
-  // const details = currencyDetails;
-  // if (details.key) debugger;
   return (
     <div>
       <Search 

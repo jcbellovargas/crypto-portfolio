@@ -58,7 +58,9 @@ export default function Dashboard() {
 /******************************************/
   const [currentSearch, setCurrentSearch] = useState([]);
   const [currencyDetails, setCurrencyDetails] = useState({});
-  
+  const [recentPrices, setRecentPrices] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
   const resetSearch = () => {
     setCurrentSearch([]);
     return;
@@ -70,6 +72,7 @@ export default function Dashboard() {
     .then( (response) => {
       setCurrencyDetails(response.data);
       resetSearch();
+      setLoaded(true);
     })
     .catch( (error) => {
       console.log(error.response)
@@ -90,12 +93,14 @@ export default function Dashboard() {
     console.log(currency_id);
     fetchCurrencyDetails(currency_id);
   }
+
+  useEffect(() => {
+    fetchCurrencyDetails(810); //Bitcoin Details
+  }, []);
 /******************************************/
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  currencyDetails.name || fetchCurrencyDetails(810); //Bitcoin
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -104,7 +109,6 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Crypto Portfolio
           </Typography>
-        {/*SEARCH BAR*/}
         </Toolbar>
 
       </AppBar>
@@ -119,17 +123,21 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
 
-            {/* Recent SelectedCurrency */}
+            {/* SelectedCurrency */}
             <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <SelectedCurrency details={currencyDetails} />
-              </Paper>
+              {loaded && (
+                <Paper className={fixedHeightPaper}>
+                  <SelectedCurrency details={currencyDetails} />
+                </Paper>
+              )}
             </Grid>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
+              {loaded && (
+                <Paper className={fixedHeightPaper}>
+                  <Chart market_data={currencyDetails.market_chart}/>
+                </Paper>
+              )}
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
@@ -139,7 +147,6 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
-
       </main>
     </div>
   );

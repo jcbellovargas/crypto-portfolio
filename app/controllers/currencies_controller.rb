@@ -11,7 +11,7 @@ class CurrenciesController < ApplicationController
   def currency_details
     @currency = Currency.find(params[:id])
     details_response = @currency.details
-    render json: details_response, status: details_response[:status]
+    render json: details_response[:response], status: details_response[:status]
   end
 
   def calculate
