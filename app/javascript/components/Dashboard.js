@@ -88,7 +88,8 @@ export default function Dashboard() {
       setLoaded(true);
     })
     .catch( (error) => {
-      console.log(error.response)
+      alert(error.response.data.message);
+      setLoaded(true);
     })
   }
   const handleChange = (e) => {
@@ -115,7 +116,6 @@ export default function Dashboard() {
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
   return (
     <div className={classes.root}>
       <CssBaseline />

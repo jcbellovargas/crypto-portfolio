@@ -6,6 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 
 // Generate Order Data
@@ -42,36 +43,44 @@ export default function CurrentPortfolio(props) {
   return (
     <React.Fragment>
       <Title>Current Portfolio</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Currency</TableCell>
-            <TableCell>Price</TableCell>
-            <TableCell>Amount</TableCell>
-            <TableCell>%</TableCell>
-            <TableCell align="right">Value</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>
-                {row.name}
-                <img className={classes.logo} src={row.img}/>
-              </TableCell>
-              <TableCell>{row.price}</TableCell>
-              <TableCell>{row.amount}</TableCell>
-              <TableCell>{row.percentage}</TableCell>
-              <TableCell align="right">{row.value}</TableCell>
+      {!(rows.length) && (
+        <Typography color="textSecondary" className={classes.depositContext}>
+          {"Your portfolio is empty."}
+        </Typography>
+      )}
+      {rows.length > 0 && (
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Currency</TableCell>
+              <TableCell>Price</TableCell>
+              <TableCell>Amount</TableCell>
+              <TableCell>%</TableCell>
+              <TableCell align="right">Value</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>
+                  {row.name}
+                  <img className={classes.logo} src={row.img}/>
+                </TableCell>
+                <TableCell>{row.price}</TableCell>
+                <TableCell>{row.amount}</TableCell>
+                <TableCell>{row.percentage}</TableCell>
+                <TableCell align="right">{row.value}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
+
+{/*      <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
           See more orders
         </Link>
-      </div>
+      </div>*/}
     </React.Fragment>
   );
 }
