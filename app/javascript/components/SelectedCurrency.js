@@ -20,29 +20,14 @@ export default function SelectedCurrency(props) {
   const classes = useStyles();
   const details = props.details;
   const change_color = details.change_24h > 0 ? "green" : "red"
-  const [open, setOpen] = useState(false);
-  const [currencyAmount, setCurrencyAmount] = useState(null);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    props.setOpenDialog(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    props.setOpenDialog(false);
   };
-
-  const handleAddToPortfolio = () => {
-    const portfolio_item = {
-      name: details.name,
-      img: details.img,
-      amount: currencyAmount, 
-      value: currencyAmount * details.price,
-      price: details.price, 
-      percentage: 0,
-    };
-    props.setPortfolio([...props.portfolio, portfolio_item]);
-    setOpen(false);
-  }
 
   return (
     <React.Fragment>
@@ -81,12 +66,12 @@ export default function SelectedCurrency(props) {
               Add to Portfolio
           </Button>
         </Grid>
-        <AddCurrencyDialog 
-          open={open} 
+        <AddCurrencyDialog
+          open={props.openDialog}
           handleClose={handleClose} 
           currencyDetails={details}
-          setAmount={setCurrencyAmount}
-          handleAddToPortfolio={handleAddToPortfolio}
+          setAmount={props.setCurrencyAmount}
+          handleAddToPortfolio={props.handleAddToPortfolio}
         />   
         
       </Grid>

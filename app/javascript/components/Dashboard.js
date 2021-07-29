@@ -71,7 +71,9 @@ export default function Dashboard() {
   const [currencyDetails, setCurrencyDetails] = useState({});
   const [recentPrices, setRecentPrices] = useState({});
   const [portfolio, setPortfolio] = useState([]);
+  const [currencyAmount, setCurrencyAmount] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const resetSearch = () => {
     setCurrentSearch([]);
@@ -105,8 +107,20 @@ export default function Dashboard() {
   const handleClick = (e) => {
     resetSearch();
     const currency_id = e.target.getAttribute("data-id");
-    console.log(currency_id);
     fetchCurrencyDetails(currency_id);
+  }
+
+  const handleAddToPortfolio = () => {
+    const portfolio_item = {
+      name: currencyDetails.name,
+      img: currencyDetails.img,
+      amount: currencyAmount,
+      value: currencyAmount * currencyDetails.price,
+      price: currencyDetails.price,
+      percentage: 0,
+    };
+    setPortfolio([...portfolio, portfolio_item]);
+    setOpenDialog(false);
   }
 
   useEffect(() => {
@@ -149,10 +163,14 @@ export default function Dashboard() {
             <Grid item xs={12} md={4} lg={3}>
               {loaded && (
                 <Paper className={fixedHeightPaper}>
-                  <SelectedCurrency 
+                  <SelectedCurrency
+                    setCurrencyAmount={setCurrencyAmount}
                     portfolio={portfolio}
                     setPortfolio={setPortfolio}
+                    handleAddToPortfolio={handleAddToPortfolio}
                     details={currencyDetails}
+                    setOpenDialog={setOpenDialog}
+                    openDialog={openDialog}
                   />
                 </Paper>
               )}

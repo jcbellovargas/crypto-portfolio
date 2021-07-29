@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '1.5rem',
     paddingTop: '0.3rem',
   },
+  tableHead: {
+     fontWeight: 'bold',
+     color: '#3f51b5',
+  }
 }));
 
 export default function CurrentPortfolio(props) {
@@ -41,14 +45,14 @@ export default function CurrentPortfolio(props) {
         </Typography>
       )}
       {displayTable && (
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Currency</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>%</TableCell>
-              <TableCell align="right">Value</TableCell>
+        <Table size="small" aria-label="simple table">
+          <TableHead >
+            <TableRow >
+              <TableCell className={classes.tableHead}>Currency</TableCell>
+              <TableCell className={classes.tableHead}>Price</TableCell>
+              <TableCell className={classes.tableHead}>Amount</TableCell>
+              <TableCell className={classes.tableHead}>%</TableCell>
+              <TableCell className={classes.tableHead} align="right">Value</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

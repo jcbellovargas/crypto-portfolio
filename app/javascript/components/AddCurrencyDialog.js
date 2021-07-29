@@ -10,7 +10,6 @@ import React from 'react';
 export default function AddCurrencyDialog(props) {
   const currency = props.currencyDetails;
 
-  console.log(currency);
   return (
     <div>
       <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
