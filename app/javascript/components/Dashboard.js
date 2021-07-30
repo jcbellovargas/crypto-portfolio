@@ -110,17 +110,50 @@ export default function Dashboard() {
     fetchCurrencyDetails(currency_id);
   }
 
-  const handleAddToPortfolio = () => {
-    const portfolio_item = {
+  const createPortfolioItem = () => {
+    return {
       name: currencyDetails.name,
       img: currencyDetails.img,
       amount: currencyAmount,
       value: currencyAmount * currencyDetails.price,
       price: currencyDetails.price,
       percentage: 0,
-    };
-    setPortfolio([...portfolio, portfolio_item]);
+    }
+  }
+
+  const consolidatePortfolioBalances = (portfolio) => {
+    const totalValue = totalPortfolioValue(portfolio);
+    portfolio = portfolio.map(item => {
+      item.percentage = (item.value / totalValue * 100).toFixed(2);
+      return item;
+    })
+    return portfolio
+  }
+
+  const addNewItem = (portfolio) => {
+    const portfolio_item = createPortfolioItem();
+    const duplicate_item = portfolio.find(item => item.name == portfolio_item.name);
+    if (duplicate_item) {
+      portfolio_item.amount += duplicate_item.amount;
+      portfolio_item.value = Number((portfolio_item.amount * portfolio_item.price).toFixed(2));
+      const index = portfolio.findIndex(item => item.name == portfolio_item.name);
+      portfolio[index] = portfolio_item;
+    } else {
+      portfolio = [...portfolio, portfolio_item]
+    }
+    return portfolio
+  }
+
+  const totalPortfolioValue = (portfolio) => {
+    return portfolio.reduce((sum, item) => sum + item.value, 0)
+  }
+
+  const handleAddToPortfolio = () => {
+    const new_portfolio = [...portfolio]
+    const portfolioWithNewItem = addNewItem(new_portfolio);
     setOpenDialog(false);
+    const consolidatedPortfolio = consolidatePortfolioBalances(portfolioWithNewItem);
+    setPortfolio(consolidatedPortfolio);
   }
 
   useEffect(() => {

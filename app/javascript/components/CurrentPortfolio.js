@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 
 function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+  return { name, date, name, shipTo, paymentMethod, amount };
 }
 
 function preventDefault(event) {
@@ -34,7 +34,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CurrentPortfolio(props) {
   const classes = useStyles();
-  const rows = props.portfolio;
+  const portfolio_data = [...props.portfolio];
+  const rows = portfolio_data.map((item, i) => {
+    item["id"] = i; 
+    return item
+  })
   const displayTable = rows.length > 0;
   return (
     <React.Fragment>
