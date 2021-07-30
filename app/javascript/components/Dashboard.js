@@ -124,7 +124,7 @@ export default function Dashboard() {
   const consolidatePortfolioBalances = (portfolio) => {
     const totalValue = totalPortfolioValue(portfolio);
     portfolio = portfolio.map(item => {
-      item.percentage = (item.value / totalValue * 100).toFixed(2);
+      item.percentage = Number((item.value / totalValue * 100).toFixed(2));
       return item;
     })
     return portfolio
@@ -220,7 +220,10 @@ export default function Dashboard() {
             <Grid item xs={12}>
               {loaded && (
                 <Paper className={classes.paper}>
-                  <CurrentPortfolio portfolio={portfolio}/>
+                  <CurrentPortfolio 
+                    portfolio={portfolio}
+                    totalPortfolioValue={totalPortfolioValue(portfolio)}
+                  />
                 </Paper>
               )}
             </Grid>             

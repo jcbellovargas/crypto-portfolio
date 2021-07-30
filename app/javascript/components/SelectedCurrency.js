@@ -6,7 +6,6 @@ import Title from './Title';
 import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import NumberFormat from 'react-number-format';
 import AddCurrencyDialog from './AddCurrencyDialog';
 
 const useStyles = makeStyles({
@@ -40,17 +39,15 @@ export default function SelectedCurrency(props) {
         </Grid>
         <Grid item xs={12}>
           <Typography component="p" variant="h4">
-            ${details.price}
+            ${details.price.toLocaleString()}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography color="textSecondary" >
-            {"Market Cap: "}
-            <NumberFormat value={details.market_cap} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+            {"Market Cap: $"+details.market_cap.toLocaleString()}
           </Typography>
           <Typography color="textSecondary" className={classes.depositContext}>
-            {"Volume (24h): "}
-            <NumberFormat value={details.volume} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+            {"Volume (24h): $"+details.volume.toLocaleString()}
           </Typography>
           <Typography color="primary" className={classes.depositContext} style={{color:change_color}}>
             Change (24h): {details.change_24h}%

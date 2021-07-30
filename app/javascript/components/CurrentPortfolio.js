@@ -7,15 +7,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import TableFooter from '@material-ui/core/TableFooter';
 import Title from './Title';
-
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { name, date, name, shipTo, paymentMethod, amount };
-}
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -66,21 +60,29 @@ export default function CurrentPortfolio(props) {
                   {row.name}
                   <img className={classes.logo} src={row.img}/>
                 </TableCell>
-                <TableCell>{row.price}</TableCell>
-                <TableCell>{row.amount}</TableCell>
-                <TableCell>{row.percentage}</TableCell>
-                <TableCell align="right">{row.value}</TableCell>
+                <TableCell>${row.price.toLocaleString()}</TableCell>
+                <TableCell>{row.amount.toLocaleString()}</TableCell>
+                <TableCell>
+                  {row.percentage}
+                  <LinearProgress color="primary" variant="determinate" value={row.percentage} />
+                </TableCell>
+                <TableCell align="right">${row.value.toLocaleString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>
+          <TableFooter align="right">
+            <TableCell/>
+            <TableCell/>
+            <TableCell/>
+            <TableCell/>
+            <TableCell align="right">
+              <Typography color="textPrimary" component="p" variant="h4">
+                Total: ${props.totalPortfolioValue.toLocaleString()}
+              </Typography>
+            </TableCell>
+          </TableFooter>
         </Table>
       )}
-
-{/*      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>*/}
     </React.Fragment>
   );
 }
