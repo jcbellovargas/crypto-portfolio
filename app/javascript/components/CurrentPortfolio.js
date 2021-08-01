@@ -77,7 +77,7 @@ export default function CurrentPortfolio(props) {
             <TableCell/>
             <TableCell align="right">
               <Typography color="textPrimary" component="p" variant="h4">
-                Total: ${props.totalPortfolioValue.toLocaleString()}
+                Total: ${props.totalPortfolioValue.toFixed(2).toLocaleString()}
               </Typography>
             </TableCell>
           </TableFooter>
