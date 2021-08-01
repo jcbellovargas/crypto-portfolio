@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
   },
   title: {
     flexGrow: 1,
@@ -187,7 +187,6 @@ export default function Dashboard() {
 
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* SelectedCurrency */}
             <Grid item xs={12} md={4} lg={3}>
               {loaded && (
                 <Paper className={fixedHeightPaper}>
@@ -203,7 +202,6 @@ export default function Dashboard() {
                 </Paper>
               )}
             </Grid>
-            {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               {loaded && (
                 <Paper className={fixedHeightPaper}>
@@ -211,7 +209,6 @@ export default function Dashboard() {
                 </Paper>
               )}
             </Grid>
-            {/* Current Portfolio */}
             <Grid item xs={12}>
               {loaded && (
                 <Paper className={classes.paper}>
