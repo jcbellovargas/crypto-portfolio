@@ -10,7 +10,7 @@ class CurrenciesController < ApplicationController
 
   def currency_details
     @currency = Currency.find(params[:id])
-    details_response = @currency.details
+    details_response = CoingeckoClient.new(@currency.currency_id).currency_details
     if details_response[:error_code].present?
       render json: details_response, status: details_response[:status]
     else

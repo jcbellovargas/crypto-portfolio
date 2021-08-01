@@ -1,5 +1,19 @@
 # https://www.coingecko.com/api/documentations/v3
 class CoingeckoClient
+
+  def initialize(currency_id)
+    @currency_id = currency_id
+  end
+
+  def currency_details
+    currency_data_response = currency_data(@currency_id)
+    return currency_data if error?
+    market_data_response = market_chart(@currency_id, "usd", 8, "daily")
+    return market_data if error?
+    currency_data_response[:response][:market_chart] = market_data_response[:response]
+    currency_data_response
+  end
+
   def currency_data(currency_id)
     # return error_response("API_ERROR", "Failed to open TCP connection to api.coingecko.com:443 (getaddrinfo: Temporary failure in name resolution)", 500)
     begin
@@ -50,7 +64,11 @@ class CoingeckoClient
 
   private
 
+  def error?
+    @error.present?
+  end
+
   def error_response(code, message, status)
-    { error_code: code, message: message, status: status }
+    @error = { error_code: code, message: message, status: status }
   end
 end
