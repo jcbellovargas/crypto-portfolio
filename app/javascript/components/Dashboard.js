@@ -65,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
 
-/******************************************/
   const [currentSearch, setCurrentSearch] = useState([]);
   const [currencyDetails, setCurrencyDetails] = useState({});
   const [recentPrices, setRecentPrices] = useState({});
@@ -73,6 +72,9 @@ export default function Dashboard() {
   const [currencyAmount, setCurrencyAmount] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const classes = useStyles();
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const DEFAULT_CURRENCY_ID = 810; //Bitcoin
 
   const resetSearch = () => {
     setCurrentSearch([]);
@@ -153,12 +155,9 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    fetchCurrencyDetails(810); //Bitcoin Details
+    fetchCurrencyDetails(DEFAULT_CURRENCY_ID);
   }, []);
-/******************************************/
 
-  const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <div className={classes.root}>
       <CssBaseline />
