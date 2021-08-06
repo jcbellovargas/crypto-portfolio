@@ -126,20 +126,22 @@ export default function Dashboard() {
     const totalValue = totalPortfolioValue(portfolio);
     portfolio.forEach(item => {
       item.percentage = Number((item.value / totalValue * 100).toFixed(2));
-    })
+    });
+    return portfolio
   }
 
   const addNewItem = (portfolio) => {
-    const portfolio_item = createPortfolioItem();
-    const duplicate_item = portfolio.find(item => item.name == portfolio_item.name);
-    if (duplicate_item) {
-      portfolio_item.amount += duplicate_item.amount;
-      portfolio_item.value = Number((portfolio_item.amount * portfolio_item.price).toFixed(2));
-      const index = portfolio.findIndex(item => item.name == portfolio_item.name);
-      portfolio[index] = portfolio_item;
+    const portfolioItem = createPortfolioItem();
+    const duplicateItem = portfolio.find(item => item.name == portfolioItem.name);
+    if (duplicateItem) {
+      portfolioItem.amount += duplicateItem.amount;
+      portfolioItem.value = Number((portfolioItem.amount * portfolioItem.price).toFixed(2));
+      const index = portfolio.findIndex(item => item.name == portfolioItem.name);
+      portfolio[index] = portfolioItem;
     } else {
-      portfolio.push(portfolio_item)
+      portfolio.push(portfolioItem);
     }
+    return portfolio
   }
 
   const totalPortfolioValue = (portfolio) => {
@@ -147,11 +149,11 @@ export default function Dashboard() {
   }
 
   const handleAddToPortfolio = () => {
-    const new_portfolio = [...portfolio]
-    addNewItem(new_portfolio);
     setOpenDialog(false);
-    consolidatePortfolioBalances(new_portfolio);
-    setPortfolio(new_portfolio);
+    const newPortfolio = [...portfolio]
+    const portfolioWithNewItem = addNewItem(newPortfolio);
+    const updatedPortoflio = consolidatePortfolioBalances(portfolioWithNewItem);
+    setPortfolio(updatedPortoflio);
   }
 
   useEffect(() => {
