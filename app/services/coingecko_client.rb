@@ -15,7 +15,6 @@ class CoingeckoClient
   end
 
   def currency_data(currency_id)
-    # return error_response("API_ERROR", "Failed to open TCP connection to api.coingecko.com:443 (getaddrinfo: Temporary failure in name resolution)", 500)
     begin
       url = "https://api.coingecko.com/api/v3/coins/#{currency_id}"
       response = Faraday.get(url)
@@ -40,7 +39,6 @@ class CoingeckoClient
   end
 
   def market_chart(currency_id, vs_currency, days, interval)
-    # return error_response("API_ERROR", "Failed to open TCP connection to api.coingecko.com:443 (getaddrinfo: Temporary failure in name resolution)", 500)
     begin
       url = "https://api.coingecko.com/api/v3/coins/"
       url += "#{currency_id}/market_chart?vs_currency=#{vs_currency}&days=#{days}&interval=#{interval}"
